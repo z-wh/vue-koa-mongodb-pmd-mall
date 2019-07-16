@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import {
-  Button, Row, Col, Swipe, SwipeItem, Lazyload,
+  Button, Row, Col, Swipe, SwipeItem, Lazyload, List,
 } from 'vant';
+import calcRootFontSize from './fontSize';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -12,9 +13,12 @@ Vue.use(Button)
   .use(Col)
   .use(Swipe)
   .use(SwipeItem)
-  .use(Lazyload);
+  .use(Lazyload)
+  .use(List);
 
 Vue.config.productionTip = false;
+
+calcRootFontSize();
 
 new Vue({
   router,

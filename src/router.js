@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ShoppingMall from './components/ShoppingMall.vue';
+import ShoppingMall from './views/ShoppingMall.vue';
 
 Vue.use(Router);
 
