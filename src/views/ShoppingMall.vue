@@ -63,6 +63,7 @@
 
 <script>
 import axios from "axios";
+import url from '@/serviceAPI.config.js'
 import recommendComponent from "@/components/recommendComponent";
 import floorComponent from "@/components/floorComponent";
 import goodsInfoComponent from "@/components/goodsInfoComponent";
@@ -88,8 +89,7 @@ export default {
   },
   created() {
     axios({
-      url:
-        "https://www.easy-mock.com/mock/5d2c2fc48ca32637d286bc87/vue-koa-mall/",
+      url: url.getShoppingMallInfo,
       method: "GET"
     })
       .then(response => {
