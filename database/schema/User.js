@@ -29,7 +29,22 @@ userSchema.pre("save", function (next) {
             next();
         })
     })
-})
+});
+
+userSchema.methods = {
+    // 密码比对方法
+    validatePassword: (_password, password) => {
+        return new Promise((resovle, reject) => {
+            bcrypt.compare(_password, password, (err, isMatch) => {
+                if (!err) {
+                    resovle(isMatch);
+                } else {
+                    reject(err);
+                }
+            })
+        })
+    }
+}
 
 // 发布模型
 mongoose.model('User', userSchema);
