@@ -3,7 +3,8 @@ const LOCALURL = 'http://localhost:3000/';
 
 const URL = {
   getShoppingMallInfo: BASEURL + 'index',
-  registUser: LOCALURL+'user/regist',
+  registUser: LOCALURL + 'user/regist',
+  login: LOCALURL + 'user/login',
 };
 
 module.exports = URL;
