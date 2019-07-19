@@ -69,7 +69,7 @@ router.post("/login", async (ctx) => {
         } else {
             // 用户不存在
             ctx.body = {
-                code: 200,
+                code: 201,
                 message: '用户名不存在',
             }
         }

@@ -1,11 +1,11 @@
 const Koa = require('koa');
 const Router = require('koa-router');
-const mongoose = require('mongoose');
 const { connect, initSchemas } = require('./database/init.js');
 const app = new Koa();
 const user = require('./controllers/User');
 const bodyParser = require('koa-bodyparser');
 const cors = require('koa-cors');
+const goods = require('./controllers/Goods');
 
 app.use(cors());
 app.use(bodyParser());
@@ -13,6 +13,7 @@ app.use(bodyParser());
 // 装载子路由
 const router = new Router();
 router.use('/user', user.routes());
+router.use('/goods', goods.routes());
 
 /**
  * 开启路由中间件
