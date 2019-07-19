@@ -15,6 +15,7 @@
       <van-field
         class="form-control"
         v-model="password"
+        type="password"
         label="密码"
         :error-message="passwordErrMsg"
         placeholder="请输入用户密码"
@@ -42,6 +43,12 @@ export default {
       passwordErrMsg: ""
     };
   },
+  created() {
+    if (localStorage.userInfo) {
+      Toast.success("您已登陆");
+      this.$router.push("/");
+    }
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
@@ -61,19 +68,34 @@ export default {
       })
         .then(response => {
           console.log(response);
-          if(response.data.code == 200 && response.data.message) {
-            Toast.success('登陆成功');
-            this.$router.push('/');
+          if (response.data.code == 200 && response.data.message) {
+            new Promise((resolve, reject) => {
+              localStorage.userInfo = JSON.stringify({
+                userName: this.userName
+              });
+              setTimeout(() => {
+                resolve();
+              }, 500);
+            })
+              .then(() => {
+                Toast.success("登陆状态保存成功" + response.data.message);
+                this.$router.push("/");
+                console.log(response.data.message);
+              })
+              .catch(err => {
+                Toast.fail("登陆状态保存失败");
+                console.log(err);
+              });
           } else {
             this.isLoading = false;
-            Toast.success('登陆失败');
+            Toast.success("登陆失败" + response.data.message);
             console.log(response.data.message);
           }
         })
         .catch(error => {
           console.log(error);
           this.isLoading = false;
-          Toast.fail('登陆失败');
+          Toast.fail("登陆失败");
         });
     },
     checkForm() {
@@ -88,13 +110,13 @@ export default {
 
       if (this.password.length < 6) {
         isOk = false;
-        this.passwordErrMsg = '密码长度不能少于6位';
+        this.passwordErrMsg = "密码长度不能少于6位";
       } else {
-        this.passwordErrMsg = '';
+        this.passwordErrMsg = "";
       }
 
       return isOk;
-    },
+    }
   }
 };
 </script>
