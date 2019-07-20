@@ -60,7 +60,7 @@ router.get('/insertAllSubCategoryInfo', async (ctx) => {
     });
 
     ctx.body = "开始批量导入商品子类信息";
-})
+});
 
 router.post('/getGoodsDetailInfo', async (ctx) => {
     try {
@@ -71,9 +71,66 @@ router.post('/getGoodsDetailInfo', async (ctx) => {
         const goodsId = ctx.request.body.goodsId;
         const Goods = mongoose.model('Goods');
         const result = await Goods.findOne({ ID: goodsId }).exec();
-        ctx.body = { code: 200, message: result, };
-    } catch(err) {
-        ctx.body = { code: 500, message: err, };
+        ctx.body = {
+            code: 200,
+            message: result,
+        };
+    } catch (err) {
+        ctx.body = {
+            code: 500,
+            message: err,
+        };
+    }
+});
+
+router.get('/getCategoryList', async (ctx) => {
+    try {
+        const Category = mongoose.model("Category");
+        const result = await Category.find().exec();
+        ctx.body = {
+            code: 200,
+            message: result,
+        };
+    } catch (err) {
+        ctx.body = {
+            code: 500,
+            message: err,
+        };
+    }
+});
+
+router.post('/getSubCategoryList', async (ctx) => {
+    try {
+        const categoryId = ctx.request.body.categoryId;
+        const SubCategory = mongoose.model('SubCategory');
+        const result = await SubCategory.find({ MALL_CATEGORY_ID: categoryId }).exec();
+        ctx.body = {
+            code: 200,
+            message: result,
+        }
+    } catch (err) {
+        ctx.body = {
+            code: 500,
+            message: err,
+        }
+    }
+});
+
+router.get('/getGoodsListBySubCategoryId', async (ctx) => {
+    try {
+        // const subCategoryId = ctx.request.body.ID;
+        const subCategoryId = '402880e86016d1b5016016e4dca2001e';
+        const Goods = mongoose.model("Goods");
+        const result = await Goods.find({SUB_ID: subCategoryId}).exec();
+        ctx.body = {
+            code: 200,
+            message: result,
+        }
+    } catch (err) {
+        ctx.body = {
+            code: 500,
+            message: err,
+        }
     }
 })
 
