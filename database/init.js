@@ -9,6 +9,7 @@ exports.initSchemas = () => {
 
 exports.connect = () => {
     return new Promise((resolve, reject) => {
+        mongoose.set('useCreateIndex', true); //去除控制台警告
         //连接数据库
         mongoose.connect(db, { useNewUrlParser: true });
 
