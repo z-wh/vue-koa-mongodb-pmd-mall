@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import ShoppingMall from './views/ShoppingMall.vue';
 import RegistUser from './views/RegistUser.vue';
 import Login from './views/Login.vue';
+import Goods from './views/Goods.vue';
 
 Vue.use(Router);
 
@@ -20,8 +21,13 @@ export default new Router({
     },
     {
       path: '/login',
-      name: Login,
+      name: 'Login',
       component: Login,
     },
+    {
+      path: '/goods',
+      name: 'Goods',
+      component: Goods,
+    }
   ],
 });

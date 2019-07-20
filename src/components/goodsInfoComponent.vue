@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="goods-info">
+        <div class="goods-info" @click="getGoodsDetial()">
           <div class="goods-image">
             <img :src="goodsImage" class="img-fluid">
           </div>
@@ -14,7 +14,7 @@
 import toMoney from "@/filter/moneyFilter.js";
 
     export default {
-        props: ["goodsImage", "goodsName", "goodsPrice"],
+        props: ["goodsId", "goodsImage", "goodsName", "goodsPrice"],
         data() {
             return {
 
@@ -24,7 +24,12 @@ import toMoney from "@/filter/moneyFilter.js";
           moneyFilter (money) {
             return toMoney(money);
           }
-        }
+        },
+        methods: {
+          getGoodsDetial() {
+            this.$router.push({name: 'Goods', query: {goodsId: this.goodsId}});
+          },
+        },
     }
 </script>
 
