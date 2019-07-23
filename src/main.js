@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {
-  Button, Row, Col, Swipe, SwipeItem, Lazyload, List, NavBar, Field, Tab, Tabs,
+  Button, Row, Col, Swipe, SwipeItem, Lazyload, List, NavBar, Field, Tab, Tabs, PullRefresh,
 } from 'vant';
 import calcRootFontSize from './fontSize';
 import App from './App.vue';
@@ -18,7 +18,8 @@ Vue.use(Button)
   .use(NavBar)
   .use(Field)
   .use(Tab)
-  .use(Tabs);
+  .use(Tabs)
+  .use(PullRefresh);
 
 Vue.config.productionTip = false;
 
