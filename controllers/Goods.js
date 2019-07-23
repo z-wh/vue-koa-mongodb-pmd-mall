@@ -116,21 +116,28 @@ router.post('/getSubCategoryList', async (ctx) => {
     }
 });
 
-router.get('/getGoodsListBySubCategoryId', async (ctx) => {
+router.post('/getGoodsListBySubCategoryId', async (ctx) => {
     try {
-        // const subCategoryId = ctx.request.body.ID;
-        const subCategoryId = '402880e86016d1b5016016e4dca2001e';
+        console.log("------------------------------------------------------------")
+        console.log("body:" + JSON.stringify(ctx.request.body));
+        const subCategoryId = ctx.request.body.subCategoryId;
+        console.log("******************subCategoryId*******************")
+        console.log(subCategoryId);
+        const page = ctx.request.body.page;
+        const pageSize = 10;
+        const start = (page - 1) * pageSize;
         const Goods = mongoose.model("Goods");
-        const result = await Goods.find({SUB_ID: subCategoryId}).exec();
+        const result = await Goods.find({SUB_ID: subCategoryId}).skip(start).limit(pageSize).exec();
         ctx.body = {
             code: 200,
             message: result,
-        }
+        };
     } catch (err) {
         ctx.body = {
             code: 500,
             message: err,
-        }
+        };
+        console.log(err);
     }
 })
 
