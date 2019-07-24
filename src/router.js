@@ -5,6 +5,8 @@ import RegistUser from './views/RegistUser.vue';
 import Login from './views/Login.vue';
 import Goods from './views/Goods.vue';
 import CategoryList from './views/CategoryList.vue';
+import Cart from './views/Cart.vue';
+import Main from './views/Main.vue';
 
 Vue.use(Router);
 
@@ -12,8 +14,30 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'ShoppingMall',
-      component: ShoppingMall,
+      name: 'Main',
+      component: Main,
+      children: [
+        {
+          path: '/shoppingMall',
+          name: 'ShoppingMall',
+          component: ShoppingMall,
+        },
+        {
+          path: '/categoryList',
+          name: 'CategoryList',
+          component: CategoryList,
+        },
+        {
+          path: '/cart',
+          name: 'Cart',
+          component: Cart,
+        },
+        {
+          path: '/login',
+          name: 'Login',
+          component: Login,
+        },
+      ],
     },
     {
       path: '/regist',
@@ -21,19 +45,9 @@ export default new Router({
       component: RegistUser,
     },
     {
-      path: '/login',
-      name: 'Login',
-      component: Login,
-    },
-    {
       path: '/goods',
       name: 'Goods',
       component: Goods,
-    },
-    {
-      path: '/categoryList',
-      name: 'CategoryList',
-      component: CategoryList,
     },
   ],
 });

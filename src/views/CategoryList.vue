@@ -29,9 +29,9 @@
             finished-text="没有更多了"
             @load="onLoad()"
           >
-            <div class="goods-wrapper" v-for="(item, index) in goodsList" :key="index">
+            <div class="goods-wrapper" v-for="(item, index) in goodsList" :key="index" @click="goGoodsInfo(item.ID)">
               <div class="goods-img">
-                <img :src="item.IMAGE1" class="img-fluid" />
+                <img :src="item.IMAGE1" class="img-fluid" :onerror="errorImg" />
               </div>
               <div class="goods-name">{{item.NAME}}</div>
               <div class="goods-price">￥{{item.PRESENT_PRICE | moneyFilter}}</div>
@@ -62,6 +62,7 @@ export default {
       loading: false, //上拉加载状态
       finished: false, //数据是否被加载完
       isRefresh: false, //下拉刷新状态
+      errorImg: 'this.src="' + require('@/assets/images/errorimg.png') + '"',
       /**
        * 上拉加载由于各种原因会同时触发2次甚至多次，
        * 比如
@@ -225,6 +226,10 @@ export default {
       this.finished = false;
       this.goodsList = [];
       this.onLoad();
+    },
+    // 点击商品跳转到商品详情
+    goGoodsInfo(goodsId) {
+      this.$router.push({name:'Goods', params: {goodsId}})
     }
   }
 };
