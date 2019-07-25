@@ -18,7 +18,7 @@ export default new Router({
       component: Main,
       children: [
         {
-          path: '/shoppingMall',
+          path: '/',
           name: 'ShoppingMall',
           component: ShoppingMall,
         },
