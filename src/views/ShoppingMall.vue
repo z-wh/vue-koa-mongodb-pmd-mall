@@ -50,7 +50,7 @@
       <div class="hot-goods-title">热卖商品</div>
       <div class="hot-goods-body">
         <van-list>
-          <van-row gutter="20">
+          <van-row gutter="20" class="mx-0">
             <van-col span="12" v-for="(item, index) in hotGoods" :key="index">
               <goods-info-component :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></goods-info-component>
             </van-col>
@@ -151,6 +151,14 @@ export default {
     padding: 0.2rem;
     font-size: 12px;
     text-align: center;
+  }
+}
+
+// vant的row设置gutter后，会因为margin撑大row
+.mx-0 {
+  margin: {
+    left: 0 !important;
+    right: 0 !important;
   }
 }
 
